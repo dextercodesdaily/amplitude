@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlowMetrics — Smarter Product Analytics</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0B0F1A;
+      --surface: #141925;
+      --border: #1E2536;
+      --text: #E4E7EE;
+      --text-muted: #8A90A0;
+      --accent: #6C5CE7;
+      --accent-hover: #7E70F0;
+      --accent-glow: rgba(108, 92, 231, 0.25);
+      --green: #00D68F;
+      --green-hover: #00E89D;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 100px 24px 80px;
+      text-align: center;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 28px;
+    }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+    }
+    h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--accent), var(--green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin: 0 auto 40px;
+    }
+    .cta-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 0 24px var(--accent-glow);
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      box-shadow: 0 0 32px var(--accent-glow);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      border-color: var(--text-muted);
+      background: var(--surface);
+      transform: translateY(-1px);
+    }
+
+    /* FEATURES */
+    .features {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px 28px;
+    }
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 18px;
+    }
+    .feature-card:nth-child(1) .feature-icon { background: rgba(108,92,231,0.15); }
+    .feature-card:nth-child(2) .feature-icon { background: rgba(0,214,143,0.15); }
+    .feature-card:nth-child(3) .feature-icon { background: rgba(253,203,110,0.15); }
+    .feature-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .feature-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* SOCIAL PROOF */
+    .social-proof {
+      text-align: center;
+      padding: 40px 24px 80px;
+      border-top: 1px solid var(--border);
+    }
+    .social-proof p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    .logos {
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logos span {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--border);
+      letter-spacing: 1px;
+    }
+
+    /* BOTTOM CTA */
+    .bottom-cta {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 80px 24px 100px;
+      text-align: center;
+    }
+    .bottom-cta h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
+    }
+    .bottom-cta p {
+      color: var(--text-muted);
+      font-size: 16px;
+      margin-bottom: 32px;
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--surface);
+      border: 1px solid var(--green);
+      color: var(--text);
+      padding: 14px 22px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.35s ease;
+      z-index: 100;
+    }
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { gap: 16px; }
+      h1 { font-size: 36px; }
+      .features { grid-template-columns: 1fr; }
+      .bottom-cta h2 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">Flow<span>Metrics</span></div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#" id="nav-signup" class="btn btn-primary" style="padding:10px 20px; font-size:14px;">Sign Up</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="badge">Now in public beta</div>
+    <h1>Understand your users, <em>not just your traffic</em></h1>
+    <p>FlowMetrics turns raw events into clear product decisions. See what users actually do — and why they leave.</p>
+    <div class="cta-group">
+      <button class="btn btn-primary" id="cta-signup">Sign Up Free →</button>
+      <button class="btn btn-secondary" id="cta-demo">Request a Demo</button>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Funnel Analysis</h3>
+      <p>See exactly where users drop off in your key flows. Identify friction points with one click.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">👥</div>
+      <h3>Behavioral Cohorts</h3>
+      <p>Group users by what they do, not who they are. Target re-engagement with precision.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <h3>Real-Time Events</h3>
+      <p>Track every interaction as it happens. No batching delays, no stale dashboards.</p>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <section class="social-proof">
+    <p>Trusted by product teams at</p>
+    <div class="logos">
+      <span>ACME</span>
+      <span>NOVA</span>
+      <span>HELIOS</span>
+      <span>APEX</span>
+      <span>ORBIT</span>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="bottom-cta">
+    <h2>Ready to see your product clearly?</h2>
+    <p>Start tracking in under five minutes. No credit card required.</p>
+    <div class="cta-group">
+      <button class="btn btn-primary" id="cta-signup-bottom">Start Free Trial →</button>
+      <button class="btn btn-secondary" id="cta-demo-bottom">Book a Walkthrough</button>
+    </div>
+  </section>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast" id="toast"></div>
+
+  <script src="https://cdn.amplitude.com/libs/analytics-browser-2.11.0-min.js.gz"></script>
+  <script>
+    const AMPLITUDE_API_KEY = '1443ddc0e87e778b1f803ba8f84c562a';
+
+    // Initialize Amplitude
+    amplitude.init(AMPLITUDE_API_KEY, {
+      autocapture: { elementInteractions: true }
+    });
+
+    // Track page view on load
+    amplitude.track('page_view', {
+      page_title: 'FlowMetrics Landing Page',
+      page_url: window.location.href,
+      referrer: document.referrer || 'direct'
+    });
+
+    // Toast helper
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+
+    // SIGN UP buttons (hero + nav + bottom)
+    document.getElementById('cta-signup').addEventListener('click', () => {
+      amplitude.track('cta_clicked', {
+        button_text: 'Sign Up Free',
+        button_location: 'hero',
+        button_type: 'signup'
+      });
+      showToast('✓ Sign Up click tracked in Amplitude');
+    });
+
+    document.getElementById('nav-signup').addEventListener('click', (e) => {
+      e.preventDefault();
+      amplitude.track('cta_clicked', {
+        button_text: 'Sign Up',
+        button_location: 'nav',
+        button_type: 'signup'
+      });
+      showToast('✓ Nav Sign Up click tracked in Amplitude');
+    });
+
+    document.getElementById('cta-signup-bottom').addEventListener('click', () => {
+      amplitude.track('cta_clicked', {
+        button_text: 'Start Free Trial',
+        button_location: 'bottom',
+        button_type: 'signup'
+      });
+      showToast('✓ Free Trial click tracked in Amplitude');
+    });
+
+    // REQUEST DEMO buttons (hero + bottom)
+    document.getElementById('cta-demo').addEventListener('click', () => {
+      amplitude.track('cta_clicked', {
+        button_text: 'Request a Demo',
+        button_location: 'hero',
+        button_type: 'demo_request'
+      });
+      showToast('✓ Demo Request click tracked in Amplitude');
+    });
+
+    document.getElementById('cta-demo-bottom').addEventListener('click', () => {
+      amplitude.track('cta_clicked', {
+        button_text: 'Book a Walkthrough',
+        button_location: 'bottom',
+        button_type: 'demo_request'
+      });
+      showToast('✓ Walkthrough Request tracked in Amplitude');
+    });
+
+    // FEATURE CARD CLICKS
+    document.querySelectorAll('.feature-card').forEach((card, i) => {
+      const names = ['Funnel Analysis', 'Behavioral Cohorts', 'Real-Time Events'];
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', () => {
+        amplitude.track('feature_card_clicked', {
+          feature_name: names[i],
+          card_position: i + 1
+        });
+        showToast(`✓ "${names[i]}" card click tracked`);
+      });
+    });
+
+    // SCROLL DEPTH TRACKING
+    let scrollMilestones = { 25: false, 50: false, 75: false, 100: false };
+    window.addEventListener('scroll', () => {
+      const scrollPct = Math.round(
+        (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
+      );
+      for (const milestone of [25, 50, 75, 100]) {
+        if (scrollPct >= milestone && !scrollMilestones[milestone]) {
+          scrollMilestones[milestone] = true;
+          amplitude.track('scroll_depth', {
+            depth_percent: milestone
+          });
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
